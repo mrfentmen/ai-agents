@@ -8,6 +8,53 @@ Target game: Godot 4.3, gritty PS1/PS2-era low-poly, no cute assets (Kenney
 ban stands). All tools serve the lanes: del = player/weapons,
 milo = enemies/ragdoll, Hana = arena/assets, pax = repo/QA.
 
+## EXISTING TOOLS — wire these into the gateway NOW (2026-09-29 survey)
+
+Do NOT rebuild these. Clone, wire into the MCP gateway, hand to the lane
+that needs them. Verified to exist via web search 2026-09-29.
+
+### Engine drivers (pick ONE per engine, don't wire five)
+
+| Server | Engine | Notes | Lane |
+|---|---|---|---|
+| `erodenn/godot-mcp-runtime` | Godot 4 | Headless edit, screenshots, input sim, runtime control. Best for us. | pax |
+| `chibuikeod/gesso-mcp-server` | Godot 4 | Runtime debug, screenshots, input emulation, asset search (itch/Kenney/OpenGameArt). | pax |
+| `ivanmurzak/unity-mcp` | Unity | Shared GameDev-MCP-Server backend, active. | — |
+| UE 5.8 built-in MCP | Unreal | **Epic ships it natively** — enable the plugin, no third party needed. | — |
+| `alarukai/unreal-mcp` | Unreal | 127 tools, no C++ plugin required (uses built-in Python). | — |
+| `amyjeanes/gmod-mcp-server` | GMod | Run Lua in a live GMod session, file-based IPC. | — |
+| `roblox-studio-mcp` | Roblox | Drives Studio (no Linux headless — testing gap unfillable). | — |
+| `youichi-uda/renpy-mcp-pro-public` | Ren'Py | Visual novels only. Not us, listed for completeness. | — |
+
+### 3D / Blender (pick ONE)
+
+| Server | Notes | Lane |
+|---|---|---|
+| `carlosh7/blender-mcp` | 239 tools, headless-ready, asset integrations (PolyHaven, Sketchfab, AmbientCG). Strongest. | Hana |
+| `rfingadam/mcp-blender` | 218 tools, Blender 4.2/5.0, render-analyze-refine loop. | Hana |
+| `ahujasid/blender-mcp` | Original, smaller, Sketchfab + Poly Haven search. | Hana |
+
+### Asset search & download
+
+| Server | Sources | Lane |
+|---|---|---|
+| `evonar543/assetmcp` | itch.io, OpenGameArt, ambientCG, Kenney, Openverse. License metadata. Blender inspect/render. | Hana |
+| `jonit-dev/threenative-asset-mcp` | Fab, Poly Haven, ambientCG, Sketchfab + game-audio catalog (Sonniss, Mixkit, Freesound...). | Hana |
+| Meshy MCPs (`pasie15/meshy-ai-mcp-server` etc.) | Text/image-to-3D, auto-rig, 500+ animations. **Needs Meshy API key (paid).** | Hana |
+| three.ws `rig_mesh` | Free auto-rig, no key, humanoids. Use until a key exists. | Hana |
+
+### Still MISSING — confirmed gaps, build these (not covered above)
+
+- **game-director** (list 1) — the conductor. Nothing like it exists.
+- **lua-port** (list 1) — GLua→Luau/GDScript. Nothing exists.
+- **gore-kit** (list 1) — dismemberment/ragdoll done right. Nothing exists.
+- **psx-ify / texture-baker** (list 2) — PBR→PS1 conversion. Nothing exists.
+- **ragdoll-tuner** (list 2) — auto-tune + drop-test ragdolls. Nothing exists.
+- **game-qa-harness** (list 2, #11+#12) — scripted playtests with assertions. Driver primitives exist, no test runner.
+- **mixamo-link** — browse/download Mixamo characters+animations as MCP. Doesn't exist (needs Adobe auth).
+- **music-director** (list 2) — royalty-free stand-in finder. Doesn't exist.
+- **ldtk-builder** (list 2) — LDtk→Godot scenes. Doesn't exist as MCP.
+
 ## Shared conventions (all agents)
 
 - MCP over stdio. Python preferred, Node acceptable.
